@@ -18,10 +18,19 @@ XO("zzoo") => false
 
 /** Function */
 const XO = (str)=> {
-
+    // use "match" string method to create an array of all matches using global regular expression
+    // the length of the resulting array is the count of the regular expression matches
+    // compare the results; if the same count, returns true
+    // need to check for null returned by match where X or O is not found
+    return (
+        ((str.toUpperCase().match(/X/g) === null) ? 0 : str.toUpperCase().match(/X/g).length) === ((str.toUpperCase().match(/O/g) === null) ? 0 : str.toUpperCase().match(/O/g).length)
+    );
 }
 
 /** Export */
 module.exports = XO;
 
 /** Tests */
+// console.log( XO("ooxx"), 's/b true');
+// console.log( XO("xooxx"), 's/b false');
+console.log( XO("pocky y"), 's/b false');
