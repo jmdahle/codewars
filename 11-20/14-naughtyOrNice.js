@@ -32,18 +32,24 @@
 // // => returns [ 'xDranik' ]
 
 /* Function */
-const getNaughty = (array) => {
-    let array2= array.filter( (item) => {
-        console.log (item);
-        return item.wasNice !== true;
-    })
-    return array2.reduce( (total, item) => {
-        return total.push(currentValue.name);
-    });
+const getNaughtyNames = (array) => {
+    let returnArray = [];
+    for (let i = 0; i < array.length; i++) {
+        if (!array[i].wasNice) {returnArray.push(array[i].name)}
+    }
+    return returnArray;
+}
+
+const getNiceNames = (array) => {
+    let returnArray = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].wasNice) {returnArray.push(array[i].name)}
+    }
+    return returnArray;
 }
 
 /* test cases */
-console.log( getNaughty([
+console.log( getNaughtyNames([
         { name: 'Warrior reading this kata', wasNice: true },
         { name: 'xDranik', wasNice: false },
         { name: 'Santa', wasNice: true }
