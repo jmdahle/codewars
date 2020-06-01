@@ -37,14 +37,16 @@ const josephus = (items, n) => {
     let eliminatedItems = [];
     let itemCount = items.length
     for (let i = 0; i < itemCount; i++) {
-        // increment counter by n to get to next item to remove
-        counter += n;
-        // if counter went past items.length, wrap around to first item again
-        if (counter > items.length) {counter -= items.length}
+        // increment counter by n to get to next item to remove; each time the end of the array is reached, continue with first item
+        for (let j = 1; j <= n; j++) {
+            counter++;
+            if (counter > items.length) {counter = 1}
+        }
         
         // take the item out of the array and put into the new array
         eliminatedItems.push(items[counter -1]);
         items.splice(counter-1,1);
+        // shift counter back (it is pointing at item AFTER the removed item) because the array is 1 shorter
         counter--;
     }
     return eliminatedItems;
@@ -54,8 +56,8 @@ const josephus = (items, n) => {
 module.exports = josephus;
 
 /* Tests */
-console.log (josephus([1,2,3,4,5,6,7,8,9,10],1),[1,2,3,4,5,6,7,8,9,10]);
-console.log (josephus([1,2,3,4,5,6,7,8,9,10],2),[2, 4, 6, 8, 10, 3, 7, 1, 9, 5]);
-console.log (josephus(["C","o","d","e","W","a","r","s"],4),['e', 's', 'W', 'o', 'C', 'd', 'r', 'a']);
-console.log (josephus([1,2,3,4,5,6,7],3),[3, 6, 2, 7, 5, 1, 4]);
-console.log (josephus([],3),[]);
+// console.log (josephus([1,2,3,4,5,6,7,8,9,10],1),[1,2,3,4,5,6,7,8,9,10]);
+// console.log (josephus([1,2,3,4,5,6,7,8,9,10],2),[2, 4, 6, 8, 10, 3, 7, 1, 9, 5]);
+// console.log (josephus(["C","o","d","e","W","a","r","s"],4),['e', 's', 'W', 'o', 'C', 'd', 'r', 'a']);
+// console.log (josephus([1,2,3,4,5,6,7],3),[3, 6, 2, 7, 5, 1, 4]);
+// console.log (josephus([],3),[]);
